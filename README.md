@@ -1,4 +1,4 @@
-# Tracky Women-Centric AI Starter Pack
+# Women-Centric AI Starter Pack
 
 This repository contains a local women-centric AI assistant prototype built around:
 

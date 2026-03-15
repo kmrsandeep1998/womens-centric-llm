@@ -120,6 +120,102 @@ Evaluation check (base vs tuned):
 python3 scripts/compare_base_vs_finetune_50.py --count 50 --max-tokens 220 --temp 0.2
 ```
 
+## Model Stack and Usage
+
+This project uses three runtime modes:
+
+1. RAG + rules (recommended app mode)
+2. Base model only (no adapter)
+3. Fine-tuned model (base + LoRA adapter)
+
+### Base and tuned model IDs
+
+- Base model: `mlx-community/Qwen2.5-1.5B-Instruct-8bit`
+- Adapter path (local training output): `artifacts/mlx_lora_qwen25_1p5b`
+- LoRA config: `artifacts/mlx_lora_qwen25_1p5b/adapter_config.json`
+
+Why this base model:
+- Runs on Apple Silicon with MLX
+- Small enough for local iteration
+- Good instruction-following baseline for safety-focused LoRA adaptation
+
+### Local setup: RAG pipeline
+
+Build retrieval corpus:
+
+```bash
+python3 scripts/build_knowledge_corpus.py
+```
+
+Run local assistant (RAG + risk engine path):
+
+```bash
+python3 scripts/run_local_assistant.py "My period is late by 8 days and I had unprotected sex 3 weeks ago."
+```
+
+### Local setup: base vs tuned generation
+
+Base model only:
+
+```bash
+python3 -m mlx_lm generate \
+  --model mlx-community/Qwen2.5-1.5B-Instruct-8bit \
+  --prompt "I have very heavy bleeding with clots and feel dizzy. Is this urgent?" \
+  --max-tokens 220 --temp 0.2
+```
+
+Fine-tuned model (base + adapter):
+
+```bash
+python3 -m mlx_lm generate \
+  --model mlx-community/Qwen2.5-1.5B-Instruct-8bit \
+  --adapter-path artifacts/mlx_lora_qwen25_1p5b \
+  --prompt "I have very heavy bleeding with clots and feel dizzy. Is this urgent?" \
+  --max-tokens 220 --temp 0.2
+```
+
+### Training flow (required order)
+
+Before training, always rebuild export files (prevents stale training data):
+
+```bash
+python3 scripts/build_training_partitions.py --input data/interaction_examples.jsonl --now 2026-03-15
+python3 scripts/export_finetune_dataset.py --require-review
+python3 scripts/prepare_mlx_chat_dataset.py
+python3 -m mlx_lm lora -c artifacts/mlx_lora_qwen25_1p5b/adapter_config.json --train
+```
+
+### How to improve quality
+
+- Add reviewed real cases (not only synthetic rows)
+- Expand benchmark prompts and run `scripts/compare_base_vs_finetune_50.py`
+- Keep template augmentation off by default (`--enable-template-augmentation` only when intentional)
+- Rebuild partitions and exports on every training run
+
+### Publish a reusable open-source model
+
+You can publish adapters so others can use the tuned model without your local data dump.
+
+Publish:
+- adapter files (`adapters.safetensors`, optional checkpoints)
+- `adapter_config.json`
+- `MODEL_CARD.md` + training notes
+- exact base model ID
+
+Consumer usage (after downloading adapter):
+
+```bash
+python3 -m mlx_lm generate \
+  --model mlx-community/Qwen2.5-1.5B-Instruct-8bit \
+  --adapter-path <downloaded_adapter_dir> \
+  --prompt "..." \
+  --max-tokens 220 --temp 0.2
+```
+
+Note:
+- This is behavior tuning, not a new foundation model.
+- Do not publish restricted/raw full-text corpora unless redistribution rights are explicit.
+
 Expand synthetic interaction examples (preview and write):
 
 ```bash

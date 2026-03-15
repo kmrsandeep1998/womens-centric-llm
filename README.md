@@ -11,6 +11,28 @@ This repository contains a local women-centric AI assistant prototype built arou
 
 Start with [codex_memory.md](codex_memory.md). It is the fastest way for a new engineer or agent to recover context.
 
+## Quick Start (5 Commands)
+
+Run from repo root:
+
+```bash
+python3 scripts/build_knowledge_corpus.py
+python3 scripts/build_training_partitions.py --input data/interaction_examples.jsonl --now 2026-03-15
+python3 scripts/export_finetune_dataset.py --require-review
+python3 scripts/prepare_mlx_chat_dataset.py
+python3 -m mlx_lm lora -c artifacts/mlx_lora_qwen25_1p5b/adapter_config.json --train
+```
+
+Quick test (tuned adapter):
+
+```bash
+python3 -m mlx_lm generate \
+  --model mlx-community/Qwen2.5-1.5B-Instruct-8bit \
+  --adapter-path artifacts/mlx_lora_qwen25_1p5b \
+  --prompt "I have very heavy bleeding with clots and feel dizzy. Is this urgent?" \
+  --max-tokens 220 --temp 0.2
+```
+
 ## Repo Layout
 
 ```text

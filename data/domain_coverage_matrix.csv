@@ -1,0 +1,28 @@
+domain_group,topic,status,priority,reason_to_include,next_artifact
+menstrual_core,cycle_basics,covered,high,Foundational physiology and timing,add_more_reviewed_chunks
+menstrual_core,heavy_bleeding,covered,high,Major safety and triage domain,expand_benchmarks
+menstrual_core,irregular_periods,covered,high,Common user question and high diagnostic breadth,expand_reviewed_cases
+menstrual_core,dysmenorrhea,partial,high,Common symptom with structural overlaps,add_chunks_and_cases
+menstrual_core,pms_pmdd,partial,high,Mood and symptom timing require explicit handling,add_chunks_and_behavior_tests
+life_stage,adolescence,covered,high,Changes interpretation of irregular cycles,add_more_benchmarks
+life_stage,postpartum_breastfeeding,covered,critical,High pregnancy/safety implications,expand_postpartum_benchmarks
+life_stage,perimenopause_menopause,covered,critical,Bleeding interpretation depends on life stage,add_more_retrieval_chunks
+structural,endometriosis,partial,high,Major cause of pain infertility and heavy bleeding,add_source_chunks_and_cases
+structural,fibroids,partial,high,Major cause of heavy bleeding anemia pressure and infertility,add_source_chunks_and_cases
+structural,adenomyosis,partial,high,Important cause of worsening pain and heavy bleeding,add_cases_and_benchmarks
+structural,polyps,partial,medium,Important abnormal bleeding differential,add_cases_and_benchmarks
+structural,ovarian_cysts,partial,high,Important acute pain and abnormal bleeding differential,add_cases_and_benchmarks
+infection,pid,partial,critical,Can threaten fertility and mimic routine pelvic pain,add_red_flag_cases
+infection,sti_related_bleeding,partial,critical,Key cause of bleeding after sex and infertility risk,expand_benchmarks
+endocrine,pcos,covered,high,Major endocrine cause of irregular cycles,add_more_structured_cases
+endocrine,thyroid_disease,partial,high,Heavy/light/absent periods and fertility overlap,add_chunks_and_followup_logic
+endocrine,premature_ovarian_insufficiency,partial,medium,Important amenorrhea and early menopause differential,add_cases_and_benchmarks
+endocrine,hyperprolactinemia,partial,medium,Affects amenorrhea and fertility,add_cases_and_benchmarks
+metabolic,anemia_iron_deficiency,covered,high,Major consequence of heavy bleeding,expand_lab_fields_and_benchmarks
+metabolic,diabetes_metabolic_syndrome,partial,medium,Important overlap especially with PCOS,add_cases_and_followup_logic
+sexual_health,painful_sex,partial,high,Important symptom with structural infectious and trauma-sensitive context,add_behavior_examples
+sexual_health,fertility_infertility,partial,high,Needed for reproductive-intent use cases,add_cases_benchmarks_and_schema_fields
+context,stress_weight_exercise,covered,high,Major hypothalamic menstrual disruptors,expand_reviewed_examples
+context,sleep_quality_of_life,partial,medium,Needed for pain and PMS burden assessment,add_feature_fields
+context,mental_health_overlap,partial,medium,Needed for PMS differential and safe responses,add_behavior_rules
+bleeding_disorders,vwd_and_related_disorders,partial,high,Commonly missed cause of heavy periods and anemia,add_screening_cases_and_benchmarks

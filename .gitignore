@@ -1,0 +1,21 @@
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Generated outputs
+artifacts/
+data/training_exports/
+data/web_crawl/
+data/real_data_fulltext/
+data/real_data_candidates.jsonl
+outputs/
+
+# Duplicate raw inputs
+raw_docs/duplicates/
+
+# Local model files or ad-hoc binaries
+*.gguf
+*.bin

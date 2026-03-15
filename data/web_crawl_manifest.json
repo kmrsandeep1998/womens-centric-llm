@@ -1,0 +1,33 @@
+{
+  "input_file": "data/web_crawl/health_pages_20260314T170832Z.jsonl",
+  "run_date": "2026-03-14T17:11:18.573654",
+  "source_catalog": "/Users/jaingler/Desktop/Tracky/data/source_catalog.csv",
+  "reference_chunks": "/Users/jaingler/Desktop/Tracky/data/reference_chunks.jsonl",
+  "new_sources": 95,
+  "new_chunks": 96,
+  "skipped": {
+    "empty": 0,
+    "too_short": 0,
+    "existing_content_hash": 1085
+  },
+  "topic_keywords_used": [
+    "menstrual",
+    "period",
+    "pregnancy",
+    "fertility",
+    "ovulation",
+    "breastfeeding",
+    "postpartum",
+    "pcos",
+    "endometriosis",
+    "fibroid",
+    "fibroids",
+    "pid",
+    "sti",
+    "contraception",
+    "thyroid",
+    "hormone",
+    "perimenopause",
+    "menopause"
+  ]
+}
